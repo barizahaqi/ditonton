@@ -1,0 +1,26 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "backdrop_path": "/path.jpg",
+            "first_air_date": "2021-09-03",
+            "genre_ids": [
+                10764
+            ],
+            "id": 130392,
+            "name": "Original Name",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The D'Amelio Show",
+            "overview": "Overview",
+            "popularity": 20,
+            "poster_path": "/path.jpg",
+            "vote_average": 9,
+            "vote_count": 1
+        }
+    ],
+    "total_pages": 137,
+    "total_results": 2740
+}
