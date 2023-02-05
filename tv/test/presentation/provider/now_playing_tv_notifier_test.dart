@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/utils//failure.dart';
-import 'package:core/utils//state_enum.dart';
+import 'package:core/utils/failure.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:tv/domain/entities/tv.dart';
 import 'package:tv/domain/usecases/get_now_playing_tv.dart';
 import 'package:tv/presentation/provider/now_playing_tv_notifier.dart';

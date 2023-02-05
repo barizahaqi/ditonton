@@ -1,4 +1,4 @@
-import 'package:core/utils//state_enum.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:tv/domain/entities/tv.dart';
 import 'package:tv/presentation/pages/popular_tv_page.dart';
 import 'package:tv/presentation/provider/popular_tv_notifier.dart';

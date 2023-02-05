@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/utils//failure.dart';
-import 'package:core/utils//state_enum.dart';
+import 'package:core/utils/failure.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:tv/domain/entities/tv.dart';
 import 'package:tv/domain/usecases/search_tv.dart';
 import 'package:tv/presentation/provider/tv_search_notifier.dart';
