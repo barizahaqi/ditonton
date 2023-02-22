@@ -7,14 +7,14 @@ abstract class NowPlayingTVState extends Equatable {
   List<Object> get props => [];
 }
 
-class NowPlayingEmpty extends NowPlayingTVState {}
+class NowPlayingTVEmpty extends NowPlayingTVState {}
 
-class NowPlayingLoading extends NowPlayingTVState {}
+class NowPlayingTVLoading extends NowPlayingTVState {}
 
-class NowPlayingError extends NowPlayingTVState {
+class NowPlayingTVError extends NowPlayingTVState {
   final String message;
 
-  NowPlayingError(this.message);
+  NowPlayingTVError(this.message);
 
   @override
   List<Object> get props => [message];

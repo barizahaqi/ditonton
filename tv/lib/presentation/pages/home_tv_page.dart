@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/entities/tv.dart';
 import 'package:about/presentation/pages/about_page.dart';
 import 'package:movies/presentation/pages/home_movie_page.dart';
+import 'package:tv/presentation/bloc/now_playing/now_playing_tv_bloc.dart';
+import 'package:tv/presentation/bloc/popular/popular_tv_bloc.dart';
+import 'package:tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
 import 'package:tv/presentation/pages/now_playing_tv_page.dart';
 import 'package:tv/presentation/pages/tv_detail_page.dart';
 import 'package:tv/presentation/pages/popular_tv_page.dart';
@@ -11,7 +14,6 @@ import 'package:movies/presentation/pages/watchlist_movie_page.dart';
 import 'package:tv/presentation/pages/watchlist_tv_page.dart';
 import 'package:tv/presentation/pages/search_tv_page.dart';
 import 'package:tv/presentation/pages/top_rated_tv_page.dart';
-import 'package:tv/presentation/bloc/list/tv_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 class TVPage extends StatefulWidget {
@@ -26,9 +28,9 @@ class _TVPageState extends State<TVPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<TVListBloc>().add(FetchTVNowPlaying());
-      context.read<TVListBloc>().add(FetchTVTopRated());
-      context.read<TVListBloc>().add(FetchTVPopular());
+      context.read<NowPlayingTVBloc>().add(FetchNowPlayingTV());
+      context.read<TopRatedTVBloc>().add(FetchTopRatedTV());
+      context.read<PopularTVBloc>().add(FetchPopularTV());
     });
   }
 
@@ -106,14 +108,15 @@ class _TVPageState extends State<TVPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, NowPlayingTVPage.ROUTE_NAME),
               ),
-              BlocBuilder<TVListBloc, TVListState>(builder: (context, state) {
-                if (state is ListLoading) {
+              BlocBuilder<NowPlayingTVBloc, NowPlayingTVState>(
+                  builder: (context, state) {
+                if (state is NowPlayingTVLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is ListNowPlayingTVHasData) {
+                } else if (state is NowPlayingTVHasData) {
                   return TVList(state.nowPlayingResult);
-                } else if (state is ListError) {
+                } else if (state is NowPlayingTVError) {
                   return Center(
                     child: Text(state.message),
                   );
@@ -126,14 +129,15 @@ class _TVPageState extends State<TVPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTVPage.ROUTE_NAME),
               ),
-              BlocBuilder<TVListBloc, TVListState>(builder: (context, state) {
-                if (state is ListLoading) {
+              BlocBuilder<PopularTVBloc, PopularTVState>(
+                  builder: (context, state) {
+                if (state is PopularTVLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is ListPopularTVHasData) {
+                } else if (state is PopularTVHasData) {
                   return TVList(state.popularResult);
-                } else if (state is ListError) {
+                } else if (state is PopularTVError) {
                   return Center(
                     child: Text(state.message),
                   );
@@ -146,14 +150,15 @@ class _TVPageState extends State<TVPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTVPage.ROUTE_NAME),
               ),
-              BlocBuilder<TVListBloc, TVListState>(builder: (context, state) {
-                if (state is ListLoading) {
+              BlocBuilder<TopRatedTVBloc, TopRatedTVState>(
+                  builder: (context, state) {
+                if (state is TopRatedTVLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is ListTopRatedTVHasData) {
+                } else if (state is TopRatedTVHasData) {
                   return TVList(state.topRatedResult);
-                } else if (state is ListError) {
+                } else if (state is TopRatedTVError) {
                   return Center(
                     child: Text(state.message),
                   );

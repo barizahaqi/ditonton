@@ -30,7 +30,7 @@ class _NowPlayingTVPageState extends State<NowPlayingTVPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<NowPlayingTVBloc, NowPlayingTVState>(
             builder: (context, state) {
-          if (state is NowPlayingLoading) {
+          if (state is NowPlayingTVLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -42,7 +42,7 @@ class _NowPlayingTVPageState extends State<NowPlayingTVPage> {
               },
               itemCount: state.nowPlayingResult.length,
             );
-          } else if (state is NowPlayingError) {
+          } else if (state is NowPlayingTVError) {
             return Center(
               child: Text(state.message),
             );

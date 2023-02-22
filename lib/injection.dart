@@ -10,23 +10,17 @@ final locator = GetIt.instance;
 void init() {
   // provider
   locator.registerFactory(
-    () => MovieListBloc(
-      getNowPlayingMovies: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
     () => MovieDetailBloc(
       getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
     ),
   );
   locator.registerFactory(
     () => MovieSearchBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => NowPlayingMovieBloc(
       locator(),
     ),
   );
@@ -41,25 +35,27 @@ void init() {
     ),
   );
   locator.registerFactory(
+    () => MovieRecommendationBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
     () => MovieWatchlistBloc(
       getWatchlistMovies: locator(),
+      getWatchListStatus: locator(),
+      saveWatchlist: locator(),
+      removeWatchlist: locator(),
     ),
   );
 
   locator.registerFactory(
-    () => TVListBloc(
-      getNowPlayingTV: locator(),
-      getPopularTV: locator(),
-      getTopRatedTV: locator(),
+    () => TVRecommendationBloc(
+      locator(),
     ),
   );
   locator.registerFactory(
     () => TVDetailBloc(
       getTVDetail: locator(),
-      getTVRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
     ),
   );
   locator.registerFactory(
@@ -86,6 +82,9 @@ void init() {
   locator.registerFactory(
     () => TVWatchlistBloc(
       getWatchlistTV: locator(),
+      getWatchListStatus: locator(),
+      saveWatchlist: locator(),
+      removeWatchlist: locator(),
     ),
   );
 

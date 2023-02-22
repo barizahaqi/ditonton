@@ -9,13 +9,13 @@ part 'popular_tv_state.dart';
 class PopularTVBloc extends Bloc<PopularTVEvent, PopularTVState> {
   final GetPopularTV getPopularTV;
 
-  PopularTVBloc(this.getPopularTV) : super(PopularEmpty()) {
+  PopularTVBloc(this.getPopularTV) : super(PopularTVEmpty()) {
     on<FetchPopularTV>((event, emit) async {
-      emit(PopularLoading());
+      emit(PopularTVLoading());
       final popularResult = await getPopularTV.execute();
       popularResult.fold(
         (failure) {
-          emit(PopularError(failure.message));
+          emit(PopularTVError(failure.message));
         },
         (data) {
           emit(PopularTVHasData(data));

@@ -7,44 +7,24 @@ abstract class MovieDetailState extends Equatable {
   List<Object> get props => [];
 }
 
-class DetailEmpty extends MovieDetailState {}
+class DetailMovieEmpty extends MovieDetailState {}
 
-class DetailLoading extends MovieDetailState {}
+class DetailMovieLoading extends MovieDetailState {}
 
-class DetailError extends MovieDetailState {
+class DetailMovieError extends MovieDetailState {
   final String message;
 
-  DetailError(this.message);
+  DetailMovieError(this.message);
 
   @override
   List<Object> get props => [message];
 }
 
-class DetailHasData extends MovieDetailState {
+class MovieDetailHasData extends MovieDetailState {
   final MovieDetail detailResult;
-  final List<Movie> recommendationResult;
-  final bool isAdded;
 
-  DetailHasData(this.detailResult, this.recommendationResult, this.isAdded);
+  MovieDetailHasData(this.detailResult);
 
   @override
-  List<Object> get props => [detailResult, recommendationResult, isAdded];
-}
-
-class WatchlistMessageLoaded extends MovieDetailState {
-  final String watchlistMessage;
-
-  WatchlistMessageLoaded(this.watchlistMessage);
-
-  @override
-  List<Object> get props => [watchlistMessage];
-}
-
-class WatchlistStatusLoaded extends MovieDetailState {
-  final bool watchlistStatus;
-
-  WatchlistStatusLoaded(this.watchlistStatus);
-
-  @override
-  List<Object> get props => [watchlistStatus];
+  List<Object> get props => [detailResult];
 }

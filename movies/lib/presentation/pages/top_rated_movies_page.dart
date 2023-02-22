@@ -30,7 +30,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
             builder: (context, state) {
-          if (state is TopRatedLoading) {
+          if (state is TopRatedMovieLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -42,7 +42,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               },
               itemCount: state.topRatedResult.length,
             );
-          } else if (state is TopRatedError) {
+          } else if (state is TopRatedMovieError) {
             return Center(
               child: Text(state.message),
             );

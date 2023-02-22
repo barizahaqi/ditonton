@@ -41,7 +41,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<MovieWatchlistBloc, WatchlistMovieState>(
             builder: (context, state) {
-          if (state is WatchlistLoading) {
+          if (state is WatchlistMovieLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -53,7 +53,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               },
               itemCount: state.watchlistResult.length,
             );
-          } else if (state is WatchlistError) {
+          } else if (state is WatchlistMovieError) {
             return Center(
               child: Text(state.message),
             );

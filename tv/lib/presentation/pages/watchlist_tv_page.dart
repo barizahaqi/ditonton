@@ -41,7 +41,7 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TVWatchlistBloc, WatchlistTVState>(
             builder: (context, state) {
-          if (state is WatchlistLoading) {
+          if (state is WatchlistTVLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -53,7 +53,7 @@ class _WatchlistTVPageState extends State<WatchlistTVPage> with RouteAware {
               },
               itemCount: state.watchlistResult.length,
             );
-          } else if (state is WatchlistError) {
+          } else if (state is WatchlistTVError) {
             return Center(
               child: Text(state.message),
             );

@@ -7,18 +7,19 @@ abstract class PopularMovieState extends Equatable {
   List<Object> get props => [];
 }
 
-class PopularEmpty extends PopularMovieState {}
+class PopularMovieEmpty extends PopularMovieState {}
 
-class PopularLoading extends PopularMovieState {}
+class PopularMovieLoading extends PopularMovieState {}
 
-class PopularError extends PopularMovieState {
+class PopularMovieError extends PopularMovieState {
   final String message;
 
-  PopularError(this.message);
+  PopularMovieError(this.message);
 
   @override
   List<Object> get props => [message];
 }
+
 class PopularMoviesHasData extends PopularMovieState {
   final List<Movie> popularResult;
 

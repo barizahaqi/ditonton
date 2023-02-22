@@ -3,6 +3,9 @@ import 'package:core/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/domain/entities/movie.dart';
 import 'package:about/presentation/pages/about_page.dart';
+import 'package:movies/presentation/bloc/now_playing/now_playing_movie_bloc.dart';
+import 'package:movies/presentation/bloc/popular/popular_movie_bloc.dart';
+import 'package:movies/presentation/bloc/top_rated/top_rated_movie_bloc.dart';
 import 'package:movies/presentation/pages/movie_detail_page.dart';
 import 'package:movies/presentation/pages/popular_movies_page.dart';
 import 'package:tv/presentation/pages/home_tv_page.dart';
@@ -10,7 +13,6 @@ import 'package:movies/presentation/pages/watchlist_movie_page.dart';
 import 'package:movies/presentation/pages/search_movies_page.dart';
 import 'package:movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:tv/presentation/pages/watchlist_tv_page.dart';
-import 'package:movies/presentation/bloc/list/movie_list_bloc.dart';
 import 'package:flutter/material.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -24,9 +26,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<MovieListBloc>().add(FetchMovieNowPlaying());
-      context.read<MovieListBloc>().add(FetchMovieTopRated());
-      context.read<MovieListBloc>().add(FetchMoviePopular());
+      context.read<NowPlayingMovieBloc>().add(FetchNowPlayingMovie());
+      context.read<TopRatedMovieBloc>().add(FetchTopRatedMovie());
+      context.read<PopularMovieBloc>().add(FetchPopularMovie());
     });
   }
 
@@ -102,15 +104,15 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 'Now Playing',
                 style: kHeading6,
               ),
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<NowPlayingMovieBloc, NowPlayingMovieState>(
                   builder: (context, state) {
-                if (state is ListLoading) {
+                if (state is NowPlayingMovieLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is ListNowPlayingMoviesHasData) {
+                } else if (state is NowPlayingMoviesHasData) {
                   return MovieList(state.nowPlayingResult);
-                } else if (state is ListError) {
+                } else if (state is NowPlayingMovieError) {
                   return Center(
                     child: Text(state.message),
                   );
@@ -123,15 +125,15 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<PopularMovieBloc, PopularMovieState>(
                   builder: (context, state) {
-                if (state is ListLoading) {
+                if (state is PopularMovieLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is ListPopularMoviesHasData) {
+                } else if (state is PopularMoviesHasData) {
                   return MovieList(state.popularResult);
-                } else if (state is ListError) {
+                } else if (state is PopularMovieError) {
                   return Center(
                     child: Text(state.message),
                   );
@@ -144,15 +146,15 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
-              BlocBuilder<MovieListBloc, MovieListState>(
+              BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
                   builder: (context, state) {
-                if (state is ListLoading) {
+                if (state is TopRatedMovieLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is ListTopRatedMoviesHasData) {
+                } else if (state is TopRatedMoviesHasData) {
                   return MovieList(state.topRatedResult);
-                } else if (state is ListError) {
+                } else if (state is TopRatedMovieError) {
                   return Center(
                     child: Text(state.message),
                   );

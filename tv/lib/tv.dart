@@ -7,7 +7,7 @@ export 'package:tv/presentation/pages/top_rated_tv_page.dart';
 export 'package:tv/presentation/pages/tv_detail_page.dart';
 export 'package:tv/presentation/pages/home_tv_page.dart';
 export 'package:tv/presentation/pages/watchlist_tv_page.dart';
-export 'package:tv/presentation/bloc/list/tv_list_bloc.dart';
+export 'package:tv/presentation/bloc/recommendation/tv_recommendation_bloc.dart';
 export 'package:tv/presentation/bloc/now_playing/now_playing_tv_bloc.dart';
 export 'package:tv/presentation/bloc/popular/popular_tv_bloc.dart';
 export 'package:tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';

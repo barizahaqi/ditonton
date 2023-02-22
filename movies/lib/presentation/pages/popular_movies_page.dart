@@ -30,7 +30,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<PopularMovieBloc, PopularMovieState>(
             builder: (context, state) {
-          if (state is PopularLoading) {
+          if (state is PopularMovieLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -42,7 +42,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               },
               itemCount: state.popularResult.length,
             );
-          } else if (state is PopularError) {
+          } else if (state is PopularMovieError) {
             return Center(
               child: Text(state.message),
             );

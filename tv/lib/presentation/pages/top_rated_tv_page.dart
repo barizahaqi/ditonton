@@ -30,7 +30,7 @@ class _TopRatedTVPageState extends State<TopRatedTVPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedTVBloc, TopRatedTVState>(
             builder: (context, state) {
-          if (state is TopRatedLoading) {
+          if (state is TopRatedTVLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -42,7 +42,7 @@ class _TopRatedTVPageState extends State<TopRatedTVPage> {
               },
               itemCount: state.topRatedResult.length,
             );
-          } else if (state is TopRatedError) {
+          } else if (state is TopRatedTVError) {
             return Center(
               child: Text(state.message),
             );

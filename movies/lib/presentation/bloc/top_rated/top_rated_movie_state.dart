@@ -7,18 +7,19 @@ abstract class TopRatedMovieState extends Equatable {
   List<Object> get props => [];
 }
 
-class TopRatedEmpty extends TopRatedMovieState {}
+class TopRatedMovieEmpty extends TopRatedMovieState {}
 
-class TopRatedLoading extends TopRatedMovieState {}
+class TopRatedMovieLoading extends TopRatedMovieState {}
 
-class TopRatedError extends TopRatedMovieState {
+class TopRatedMovieError extends TopRatedMovieState {
   final String message;
 
-  TopRatedError(this.message);
+  TopRatedMovieError(this.message);
 
   @override
   List<Object> get props => [message];
 }
+
 class TopRatedMoviesHasData extends TopRatedMovieState {
   final List<Movie> topRatedResult;
 

@@ -7,14 +7,14 @@ abstract class TopRatedTVState extends Equatable {
   List<Object> get props => [];
 }
 
-class TopRatedEmpty extends TopRatedTVState {}
+class TopRatedTVEmpty extends TopRatedTVState {}
 
-class TopRatedLoading extends TopRatedTVState {}
+class TopRatedTVLoading extends TopRatedTVState {}
 
-class TopRatedError extends TopRatedTVState {
+class TopRatedTVError extends TopRatedTVState {
   final String message;
 
-  TopRatedError(this.message);
+  TopRatedTVError(this.message);
 
   @override
   List<Object> get props => [message];

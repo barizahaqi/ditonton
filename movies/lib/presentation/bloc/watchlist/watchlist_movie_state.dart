@@ -7,14 +7,14 @@ abstract class WatchlistMovieState extends Equatable {
   List<Object> get props => [];
 }
 
-class WatchlistEmpty extends WatchlistMovieState {}
+class WatchlistMovieEmpty extends WatchlistMovieState {}
 
-class WatchlistLoading extends WatchlistMovieState {}
+class WatchlistMovieLoading extends WatchlistMovieState {}
 
-class WatchlistError extends WatchlistMovieState {
+class WatchlistMovieError extends WatchlistMovieState {
   final String message;
 
-  WatchlistError(this.message);
+  WatchlistMovieError(this.message);
 
   @override
   List<Object> get props => [message];
@@ -27,4 +27,22 @@ class WatchlistMoviesHasData extends WatchlistMovieState {
 
   @override
   List<Object> get props => [watchlistResult];
+}
+
+class WatchlistMovieMessage extends WatchlistMovieState {
+  final String watchlistMessage;
+
+  WatchlistMovieMessage(this.watchlistMessage);
+
+  @override
+  List<Object> get props => [watchlistMessage];
+}
+
+class WatchlistMovieGetStatus extends WatchlistMovieState {
+  final bool watchlistStatus;
+
+  WatchlistMovieGetStatus(this.watchlistStatus);
+
+  @override
+  List<Object> get props => [watchlistStatus];
 }

@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
-import 'package:core/utils/state_enum.dart';
 import 'package:movies/domain/entities/movie.dart';
 import 'package:movies/domain/usecases/search_movies.dart';
 import 'package:movies/presentation/bloc/search/movie_search_bloc.dart';

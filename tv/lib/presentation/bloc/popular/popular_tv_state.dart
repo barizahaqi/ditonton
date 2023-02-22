@@ -7,14 +7,14 @@ abstract class PopularTVState extends Equatable {
   List<Object> get props => [];
 }
 
-class PopularEmpty extends PopularTVState {}
+class PopularTVEmpty extends PopularTVState {}
 
-class PopularLoading extends PopularTVState {}
+class PopularTVLoading extends PopularTVState {}
 
-class PopularError extends PopularTVState {
+class PopularTVError extends PopularTVState {
   final String message;
 
-  PopularError(this.message);
+  PopularTVError(this.message);
 
   @override
   List<Object> get props => [message];

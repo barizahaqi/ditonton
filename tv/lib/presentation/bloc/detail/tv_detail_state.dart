@@ -7,44 +7,24 @@ abstract class TVDetailState extends Equatable {
   List<Object> get props => [];
 }
 
-class DetailEmpty extends TVDetailState {}
+class DetailTVEmpty extends TVDetailState {}
 
-class DetailLoading extends TVDetailState {}
+class DetailTVLoading extends TVDetailState {}
 
-class DetailError extends TVDetailState {
+class DetailTVError extends TVDetailState {
   final String message;
 
-  DetailError(this.message);
+  DetailTVError(this.message);
 
   @override
   List<Object> get props => [message];
 }
 
-class DetailHasData extends TVDetailState {
+class TVDetailHasData extends TVDetailState {
   final TVDetail detailResult;
-  final List<TV> recommendationResult;
-  final bool isAdded;
 
-  DetailHasData(this.detailResult, this.recommendationResult, this.isAdded);
+  TVDetailHasData(this.detailResult);
 
   @override
-  List<Object> get props => [detailResult, recommendationResult, isAdded];
-}
-
-class WatchlistMessageLoaded extends TVDetailState {
-  final String watchlistMessage;
-
-  WatchlistMessageLoaded(this.watchlistMessage);
-
-  @override
-  List<Object> get props => [watchlistMessage];
-}
-
-class WatchlistStatusLoaded extends TVDetailState {
-  final bool watchlistStatus;
-
-  WatchlistStatusLoaded(this.watchlistStatus);
-
-  @override
-  List<Object> get props => [watchlistStatus];
+  List<Object> get props => [detailResult];
 }

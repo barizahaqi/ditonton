@@ -11,13 +11,13 @@ class TopRatedTVBloc extends Bloc<TopRatedTVEvent, TopRatedTVState> {
 
   TopRatedTVBloc({
     required this.getTopRatedTV,
-  }) : super(TopRatedEmpty()) {
+  }) : super(TopRatedTVEmpty()) {
     on<FetchTopRatedTV>((event, emit) async {
-      emit(TopRatedLoading());
+      emit(TopRatedTVLoading());
       final topRatedResult = await getTopRatedTV.execute();
       topRatedResult.fold(
         (failure) {
-          emit(TopRatedError(failure.message));
+          emit(TopRatedTVError(failure.message));
         },
         (data) {
           emit(TopRatedTVHasData(data));

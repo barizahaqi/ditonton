@@ -29,7 +29,7 @@ class _PopulartvsPageState extends State<PopularTVPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<PopularTVBloc, PopularTVState>(
             builder: (context, state) {
-          if (state is PopularLoading) {
+          if (state is PopularTVLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -41,7 +41,7 @@ class _PopulartvsPageState extends State<PopularTVPage> {
               },
               itemCount: state.popularResult.length,
             );
-          } else if (state is PopularError) {
+          } else if (state is PopularTVError) {
             return Center(
               child: Text(state.message),
             );
