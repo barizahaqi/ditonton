@@ -10,14 +10,14 @@ final locator = GetIt.instance;
 void init() {
   // provider
   locator.registerFactory(
-    () => MovieListNotifier(
+    () => MovieListBloc(
       getNowPlayingMovies: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),
     ),
   );
   locator.registerFactory(
-    () => MovieDetailNotifier(
+    () => MovieDetailBloc(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
       getWatchListStatus: locator(),
@@ -26,35 +26,35 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularMoviesNotifier(
+    () => MovieSearchBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedMoviesNotifier(
+    () => PopularMovieBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TopRatedMovieBloc(
       getTopRatedMovies: locator(),
     ),
   );
   locator.registerFactory(
-    () => WatchlistMovieNotifier(
+    () => MovieWatchlistBloc(
       getWatchlistMovies: locator(),
     ),
   );
 
   locator.registerFactory(
-    () => TVListNotifier(
+    () => TVListBloc(
       getNowPlayingTV: locator(),
       getPopularTV: locator(),
       getTopRatedTV: locator(),
     ),
   );
   locator.registerFactory(
-    () => TVDetailNotifier(
+    () => TVDetailBloc(
       getTVDetail: locator(),
       getTVRecommendations: locator(),
       getWatchListStatus: locator(),
@@ -63,28 +63,28 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TVSearchNotifier(
-      searchTV: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularTVNotifier(
+    () => TVSearchBloc(
       locator(),
     ),
   );
   locator.registerFactory(
-    () => NowPlayingTVNotifier(
+    () => PopularTVBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => NowPlayingTVBloc(
       locator(),
     ),
   );
 
   locator.registerFactory(
-    () => TopRatedTVNotifier(
+    () => TopRatedTVBloc(
       getTopRatedTV: locator(),
     ),
   );
   locator.registerFactory(
-    () => WatchlistTVNotifier(
+    () => TVWatchlistBloc(
       getWatchlistTV: locator(),
     ),
   );

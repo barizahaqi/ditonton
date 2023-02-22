@@ -48,6 +48,8 @@ dependencies:
       url: https://github.com/chornthorn/data_connection_checker.git
       ref: master
   path_provider: ^2.0.2
+  flutter_bloc: ^8.1.0
+  rxdart: ^0.27.1
   
 
 dev_dependencies:

@@ -1,5 +1,5 @@
-import 'package:core/utils/state_enum.dart';
-import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +15,9 @@ class _TopRatedTVPageState extends State<TopRatedTVPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<TopRatedTVNotifier>(context, listen: false)
-            .fetchTopRatedTV());
+    Future.microtask(() {
+      context.read<TopRatedTVBloc>().add(FetchTopRatedTV());
+    });
   }
 
   @override
@@ -28,28 +28,28 @@ class _TopRatedTVPageState extends State<TopRatedTVPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTVNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final tv = data.tv[index];
-                  return TVCard(tv);
-                },
-                itemCount: data.tv.length,
-              );
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
-            }
-          },
-        ),
+        child: BlocBuilder<TopRatedTVBloc, TopRatedTVState>(
+            builder: (context, state) {
+          if (state is TopRatedLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is TopRatedTVHasData) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                final tv = state.topRatedResult[index];
+                return TVCard(tv);
+              },
+              itemCount: state.topRatedResult.length,
+            );
+          } else if (state is TopRatedError) {
+            return Center(
+              child: Text(state.message),
+            );
+          } else {
+            return Container();
+          }
+        }),
       ),
     );
   }
