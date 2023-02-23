@@ -25,6 +25,7 @@ dependencies:
   dartz: ^0.10.0-nullsafety.2
   flutter_bloc: ^8.1.0
   rxdart: ^0.27.1
+  firebase_crashlytics: ^3.0.15
 
 dev_dependencies:
   flutter_test:
