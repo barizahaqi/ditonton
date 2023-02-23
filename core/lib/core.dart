@@ -8,6 +8,4 @@ export 'package:core/data/models/genre_model.dart';
 export 'package:core/utils/exception.dart';
 export 'package:core/utils/failure.dart';
 export 'package:core/utils/network_info.dart';
-export 'package:core/utils/state_enum.dart';
-
-
+export 'package:core/utils/ssl_pinning.dart';
