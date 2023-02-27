@@ -97,6 +97,16 @@ class DetailContent extends StatefulWidget {
 
 class _DetailContentState extends State<DetailContent> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context
+          .read<TVRecommendationBloc>()
+          .add(FetchTVRecommendation(widget.id));
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(

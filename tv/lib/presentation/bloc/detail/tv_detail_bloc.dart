@@ -16,8 +16,8 @@ class TVDetailBloc extends Bloc<TVDetailEvent, TVDetailState> {
   final SaveWatchlistTV saveWatchlist;
   final RemoveWatchlistTV removeWatchlist;
 
-  static const String messageSuccessAdded = 'Success Added to Watchlist';
-  static const String messageSuccessRemoved = 'Success Removed from Watchlist';
+  static const String messageSuccessAdded = 'Added to Watchlist';
+  static const String messageSuccessRemoved = 'Removed from Watchlist';
 
   TVDetailBloc(
       {required this.getTVDetail,

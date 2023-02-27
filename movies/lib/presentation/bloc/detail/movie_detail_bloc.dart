@@ -13,8 +13,8 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final SaveWatchlistMovies saveWatchlist;
   final RemoveWatchlistMovies removeWatchlist;
 
-  static const String messageSuccessAdded = 'Success Added to Watchlist';
-  static const String messageSuccessRemoved = 'Success Removed from Watchlist';
+  static const String messageSuccessAdded = 'Added to Watchlist';
+  static const String messageSuccessRemoved = 'Removed from Watchlist';
 
   MovieDetailBloc(
       {required this.getMovieDetail,
