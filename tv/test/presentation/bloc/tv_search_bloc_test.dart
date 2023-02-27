@@ -15,14 +15,16 @@ import 'tv_search_bloc_test.mocks.dart';
 void main() {
   late TVSearchBloc searchBloc;
   late MockSearchTV mockSearchTVs;
+  late OnQueryChanged onQueryChanged;
 
   setUp(() {
     mockSearchTVs = MockSearchTV();
     searchBloc = TVSearchBloc(mockSearchTVs);
+    onQueryChanged = OnQueryChanged("tv");
   });
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(searchBloc.state, TVSearchEmpty());
   });
 
   final tTVModel = TV(
@@ -52,8 +54,8 @@ void main() {
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      SearchLoading(),
-      SearchHasData(tTVList),
+      TVSearchLoading(),
+      TVSearchHasData(tTVList),
     ],
     verify: (bloc) {
       verify(mockSearchTVs.execute(tQuery));
@@ -70,11 +72,15 @@ void main() {
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      SearchLoading(),
-      SearchError('Server Failure'),
+      TVSearchLoading(),
+      TVSearchError('Server Failure'),
     ],
     verify: (bloc) {
       verify(mockSearchTVs.execute(tQuery));
     },
   );
+  test('should get property query from OnQueryChanged', () {
+    String query = "tv";
+    expect(onQueryChanged.props, [query]);
+  });
 }

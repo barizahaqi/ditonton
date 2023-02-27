@@ -13,10 +13,12 @@ import 'popular_tv_bloc_test.mocks.dart';
 @GenerateMocks([GetPopularTV])
 void main() {
   late MockGetPopularTV mockGetPopularTV;
+  late FetchPopularTV fetchPopularTV;
   late PopularTVBloc bloc;
   setUp(() {
     mockGetPopularTV = MockGetPopularTV();
     bloc = PopularTVBloc(mockGetPopularTV);
+    fetchPopularTV = FetchPopularTV();
   });
   final tId = 1;
 
@@ -70,4 +72,7 @@ void main() {
       verify(mockGetPopularTV.execute());
     },
   );
+  test('should get property empty from FetchPopularTV', () {
+    expect(fetchPopularTV.props, []);
+  });
 }

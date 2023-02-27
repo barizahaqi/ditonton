@@ -12,6 +12,9 @@ void init() {
   locator.registerFactory(
     () => MovieDetailBloc(
       getMovieDetail: locator(),
+      getWatchListStatus: locator(),
+      saveWatchlist: locator(),
+      removeWatchlist: locator(),
     ),
   );
   locator.registerFactory(
@@ -42,9 +45,6 @@ void init() {
   locator.registerFactory(
     () => MovieWatchlistBloc(
       getWatchlistMovies: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
     ),
   );
 
@@ -56,6 +56,9 @@ void init() {
   locator.registerFactory(
     () => TVDetailBloc(
       getTVDetail: locator(),
+      getWatchListStatus: locator(),
+      saveWatchlist: locator(),
+      removeWatchlist: locator(),
     ),
   );
   locator.registerFactory(
@@ -82,9 +85,6 @@ void init() {
   locator.registerFactory(
     () => TVWatchlistBloc(
       getWatchlistTV: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
     ),
   );
 

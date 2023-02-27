@@ -18,9 +18,11 @@ import 'tv_recommendation_bloc_test.mocks.dart';
 void main() {
   late MockGetTVRecommendations mockGetTVRecommendation;
   late TVRecommendationBloc bloc;
+  late FetchTVRecommendation fetchTVRecommendation;
   setUp(() {
     mockGetTVRecommendation = MockGetTVRecommendations();
     bloc = TVRecommendationBloc(mockGetTVRecommendation);
+    fetchTVRecommendation = FetchTVRecommendation(1);
   });
   final tId = 1;
 
@@ -75,4 +77,7 @@ void main() {
       verify(mockGetTVRecommendation.execute(tId));
     },
   );
+  test('should get property id from FetchTopRatedTV', () {
+    expect(fetchTVRecommendation.props, [1]);
+  });
 }

@@ -3,9 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
 import 'package:movies/domain/entities/movie.dart';
 import 'package:movies/domain/usecases/get_watchlist_movies.dart';
-import 'package:movies/domain/usecases/get_watchlist_status_movies.dart';
-import 'package:movies/domain/usecases/remove_watchlist_movies.dart';
-import 'package:movies/domain/usecases/save_watchlist_movies.dart';
+
 import 'package:movies/presentation/bloc/watchlist/watchlist_movie_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -16,28 +14,20 @@ import '../../dummy_data/dummy_objects_movies.dart';
 
 @GenerateMocks([
   GetWatchlistMovies,
-  GetWatchListStatusMovies,
-  SaveWatchlistMovies,
-  RemoveWatchlistMovies,
 ])
 void main() {
   late MockGetWatchlistMovies mockGetWatchlistMovies;
   late MovieWatchlistBloc bloc;
-  late MockGetWatchListStatusMovies mockGetWatchlistStatus;
-  late MockSaveWatchlistMovies mockSaveWatchlist;
-  late MockRemoveWatchlistMovies mockRemoveWatchlist;
+
+  late FetchMovieWatchlist fetchMovieWatchlist;
 
   setUp(() {
     mockGetWatchlistMovies = MockGetWatchlistMovies();
-    mockGetWatchlistStatus = MockGetWatchListStatusMovies();
-    mockSaveWatchlist = MockSaveWatchlistMovies();
-    mockRemoveWatchlist = MockRemoveWatchlistMovies();
+
     bloc = MovieWatchlistBloc(
       getWatchlistMovies: mockGetWatchlistMovies,
-      getWatchListStatus: mockGetWatchlistStatus,
-      saveWatchlist: mockSaveWatchlist,
-      removeWatchlist: mockRemoveWatchlist,
     );
+    fetchMovieWatchlist = FetchMovieWatchlist();
   });
 
   final tId = 1;
@@ -98,93 +88,7 @@ void main() {
       },
     );
   });
-
-  group('GetWatchlistStatus', () {
-    blocTest<MovieWatchlistBloc, WatchlistMovieState>(
-      'return true when movie is in watchlist',
-      build: () {
-        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
-        return bloc;
-      },
-      act: (bloc) => bloc.add(LoadMovieWatchlistStatus(tId)),
-      expect: () => [WatchlistMovieGetStatus(true)],
-      verify: (bloc) {
-        verify(mockGetWatchlistStatus.execute(tId));
-      },
-    );
-
-    blocTest<MovieWatchlistBloc, WatchlistMovieState>(
-      'return false when movie is not in watchlist',
-      build: () {
-        when(mockGetWatchlistStatus.execute(tId))
-            .thenAnswer((_) async => false);
-        return bloc;
-      },
-      act: (bloc) => bloc.add(LoadMovieWatchlistStatus(tId)),
-      expect: () => [WatchlistMovieGetStatus(false)],
-      verify: (bloc) {
-        verify(mockGetWatchlistStatus.execute(tId));
-      },
-    );
+  test('should get property empty from FetchMovieWatchlist', () {
+    expect(fetchMovieWatchlist.props, []);
   });
-
-  group('Post add and remove watchlist status', () {
-    blocTest<MovieWatchlistBloc, WatchlistMovieState>(
-      'should update watchlist status when movie is success added to watchlist',
-      build: () {
-        when(mockSaveWatchlist.execute(testMovieDetail)).thenAnswer(
-            (_) async => Right(MovieWatchlistBloc.messageSuccessAdded));
-        return bloc;
-      },
-      act: (bloc) => bloc.add(AddMovieWatchlist(testMovieDetail)),
-      expect: () =>
-          [WatchlistMovieMessage(MovieWatchlistBloc.messageSuccessAdded)],
-      verify: (bloc) {
-        verify(mockSaveWatchlist.execute(testMovieDetail));
-      },
-    );
-
-    blocTest<MovieWatchlistBloc, WatchlistMovieState>(
-      'should throw error when movie is failed added to watchlist',
-      build: () {
-        when(mockSaveWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure("Failed")));
-        return bloc;
-      },
-      act: (bloc) => bloc.add(AddMovieWatchlist(testMovieDetail)),
-      expect: () => [WatchlistMovieError("Failed")],
-      verify: (bloc) {
-        verify(mockSaveWatchlist.execute(testMovieDetail));
-      },
-    );
-
-    blocTest<MovieWatchlistBloc, WatchlistMovieState>(
-      'should update watchlist status when movie is success removed from watchlist',
-      build: () {
-        when(mockRemoveWatchlist.execute(testMovieDetail)).thenAnswer(
-            (_) async => Right(MovieWatchlistBloc.messageSuccessRemoved));
-        return bloc;
-      },
-      act: (bloc) => bloc.add(RemoveMovieWatchlist(testMovieDetail)),
-      expect: () =>
-          [WatchlistMovieMessage(MovieWatchlistBloc.messageSuccessRemoved)],
-      verify: (bloc) {
-        verify(mockRemoveWatchlist.execute(testMovieDetail));
-      },
-    );
-  });
-
-  blocTest<MovieWatchlistBloc, WatchlistMovieState>(
-    'should throw error when movie is failed removed from watchlist',
-    build: () {
-      when(mockRemoveWatchlist.execute(testMovieDetail))
-          .thenAnswer((_) async => Left(DatabaseFailure("Failed")));
-      return bloc;
-    },
-    act: (bloc) => bloc.add(RemoveMovieWatchlist(testMovieDetail)),
-    expect: () => [WatchlistMovieError("Failed")],
-    verify: (bloc) {
-      verify(mockRemoveWatchlist.execute(testMovieDetail));
-    },
-  );
 }

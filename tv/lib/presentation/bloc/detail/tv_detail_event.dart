@@ -10,3 +10,30 @@ class FetchTVDetail extends TVDetailEvent {
   @override
   List<Object> get props => [id];
 }
+
+class AddTVWatchlist extends TVDetailEvent {
+  final TVDetail tv;
+
+  AddTVWatchlist(this.tv);
+
+  @override
+  List<Object> get props => [tv];
+}
+
+class RemoveTVWatchlist extends TVDetailEvent {
+  final TVDetail tv;
+
+  RemoveTVWatchlist(this.tv);
+
+  @override
+  List<Object> get props => [tv];
+}
+
+class LoadTVWatchlistStatus extends TVDetailEvent {
+  final int id;
+
+  LoadTVWatchlistStatus(this.id);
+
+  @override
+  List<Object> get props => [id];
+}

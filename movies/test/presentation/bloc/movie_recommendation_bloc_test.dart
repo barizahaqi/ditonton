@@ -18,9 +18,11 @@ import 'movie_recommendation_bloc_test.mocks.dart';
 void main() {
   late MockGetMovieRecommendations mockGetMovieRecommendation;
   late MovieRecommendationBloc bloc;
+  late FetchMovieRecommendation fetchMovieRecommendation;
   setUp(() {
     mockGetMovieRecommendation = MockGetMovieRecommendations();
     bloc = MovieRecommendationBloc(mockGetMovieRecommendation);
+    fetchMovieRecommendation = FetchMovieRecommendation(1);
   });
   final tId = 1;
 
@@ -77,4 +79,8 @@ void main() {
       verify(mockGetMovieRecommendation.execute(tId));
     },
   );
+  test('should get property empty from FetchNowPlayingMovie', () {
+    int id = 1;
+    expect(fetchMovieRecommendation.props, [id]);
+  });
 }

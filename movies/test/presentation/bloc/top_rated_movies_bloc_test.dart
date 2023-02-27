@@ -14,10 +14,12 @@ import 'top_rated_movies_bloc_test.mocks.dart';
 void main() {
   late MockGetTopRatedMovies mockGetTopRatedMovies;
   late TopRatedMovieBloc bloc;
+  late FetchTopRatedMovie fetchTopRatedMovie;
 
   setUp(() {
     mockGetTopRatedMovies = MockGetTopRatedMovies();
     bloc = TopRatedMovieBloc(getTopRatedMovies: mockGetTopRatedMovies);
+    fetchTopRatedMovie = FetchTopRatedMovie();
   });
   final tId = 1;
 
@@ -73,4 +75,8 @@ void main() {
       verify(mockGetTopRatedMovies.execute());
     },
   );
+
+  test('should get property empty from FetchTopRatedMovie', () {
+    expect(fetchTopRatedMovie.props, []);
+  });
 }

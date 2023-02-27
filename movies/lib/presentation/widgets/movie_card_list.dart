@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-
+  final UniqueKey actionKey = UniqueKey();
   MovieCard(this.movie);
 
   @override
@@ -14,6 +14,7 @@ class MovieCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
+        key: actionKey,
         onTap: () {
           Navigator.pushNamed(
             context,

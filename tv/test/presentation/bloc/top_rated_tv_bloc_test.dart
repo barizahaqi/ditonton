@@ -14,10 +14,12 @@ import 'top_rated_tv_bloc_test.mocks.dart';
 void main() {
   late MockGetTopRatedTV mockGetTopRatedTV;
   late TopRatedTVBloc bloc;
+  late FetchTopRatedTV fetchTopRatedTV;
 
   setUp(() {
     mockGetTopRatedTV = MockGetTopRatedTV();
     bloc = TopRatedTVBloc(getTopRatedTV: mockGetTopRatedTV);
+    fetchTopRatedTV = FetchTopRatedTV();
   });
   final tId = 1;
 
@@ -71,4 +73,7 @@ void main() {
       verify(mockGetTopRatedTV.execute());
     },
   );
+  test('should get property empty from FetchTopRatedTV', () {
+    expect(fetchTopRatedTV.props, []);
+  });
 }

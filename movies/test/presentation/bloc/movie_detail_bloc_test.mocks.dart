@@ -11,6 +11,9 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies/domain/entities/movie_detail.dart' as _i7;
 import 'package:movies/domain/repositories/movie_repository.dart' as _i2;
 import 'package:movies/domain/usecases/get_movie_detail.dart' as _i4;
+import 'package:movies/domain/usecases/get_watchlist_status_movies.dart' as _i8;
+import 'package:movies/domain/usecases/remove_watchlist_movies.dart' as _i10;
+import 'package:movies/domain/usecases/save_watchlist_movies.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -76,4 +79,101 @@ class MockGetMovieDetail extends _i1.Mock implements _i4.GetMovieDetail {
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i7.MovieDetail>>);
+}
+
+/// A class which mocks [GetWatchListStatusMovies].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetWatchListStatusMovies extends _i1.Mock
+    implements _i8.GetWatchListStatusMovies {
+  MockGetWatchListStatusMovies() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+  @override
+  _i5.Future<bool> execute(int? id) => (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [id],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+}
+
+/// A class which mocks [SaveWatchlistMovies].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSaveWatchlistMovies extends _i1.Mock
+    implements _i9.SaveWatchlistMovies {
+  MockSaveWatchlistMovies() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, String>> execute(_i7.MovieDetail? movie) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [movie],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, String>>.value(
+            _FakeEither_1<_i6.Failure, String>(
+          this,
+          Invocation.method(
+            #execute,
+            [movie],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, String>>);
+}
+
+/// A class which mocks [RemoveWatchlistMovies].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRemoveWatchlistMovies extends _i1.Mock
+    implements _i10.RemoveWatchlistMovies {
+  MockRemoveWatchlistMovies() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, String>> execute(_i7.MovieDetail? movie) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [movie],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, String>>.value(
+            _FakeEither_1<_i6.Failure, String>(
+          this,
+          Invocation.method(
+            #execute,
+            [movie],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, String>>);
 }

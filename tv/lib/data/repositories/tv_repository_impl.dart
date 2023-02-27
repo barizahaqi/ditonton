@@ -32,6 +32,8 @@ class TVRepositoryImpl implements TVRepository {
         return Right(result.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
+      } on TlsException {
+        return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
       }
     } else {
       try {
@@ -39,6 +41,8 @@ class TVRepositoryImpl implements TVRepository {
         return Right(result.map((model) => model.toEntity()).toList());
       } on CacheException catch (e) {
         return Left(CacheFailure(e.message));
+      } on TlsException {
+        return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
       }
     }
   }
@@ -52,6 +56,8 @@ class TVRepositoryImpl implements TVRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -64,6 +70,8 @@ class TVRepositoryImpl implements TVRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -76,6 +84,8 @@ class TVRepositoryImpl implements TVRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -88,6 +98,8 @@ class TVRepositoryImpl implements TVRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -100,6 +112,8 @@ class TVRepositoryImpl implements TVRepository {
       return Left(ServerFailure(''));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 

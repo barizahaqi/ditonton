@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
 import 'package:tv/domain/entities/tv.dart';
-import 'package:tv/domain/usecases/get_now_playing_tv.dart';
 import 'package:tv/tv.dart';
 import 'package:tv/presentation/bloc/now_playing/now_playing_tv_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,9 +14,11 @@ import 'now_playing_tv_bloc_test.mocks.dart';
 void main() {
   late MockGetNowPlayingTV mockGetNowPlayingTV;
   late NowPlayingTVBloc bloc;
+  late FetchNowPlayingTV fetchNowPlayingTV;
   setUp(() {
     mockGetNowPlayingTV = MockGetNowPlayingTV();
     bloc = NowPlayingTVBloc(mockGetNowPlayingTV);
+    fetchNowPlayingTV = FetchNowPlayingTV();
   });
   final tId = 1;
 
@@ -72,4 +73,7 @@ void main() {
       verify(mockGetNowPlayingTV.execute());
     },
   );
+  test('should get property empty from FetchNowPlayingTV', () {
+    expect(fetchNowPlayingTV.props, []);
+  });
 }

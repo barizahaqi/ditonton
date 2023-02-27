@@ -18,8 +18,7 @@ class SSLPinning {
   static http.Client get client => _clientInstance ?? http.Client();
 
   static Future<SecurityContext> get _globalContext async {
-    final sslCert =
-        await rootBundle.load('certificates/themoviedb_certificate.pem');
+    final sslCert = await rootBundle.load('certificates/certificate.pem');
     SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
     securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
     return securityContext;

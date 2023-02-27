@@ -13,10 +13,12 @@ import 'popular_movies_bloc_test.mocks.dart';
 @GenerateMocks([GetPopularMovies])
 void main() {
   late MockGetPopularMovies mockGetPopularMovies;
+  late FetchPopularMovie fetchPopularMovie;
   late PopularMovieBloc bloc;
   setUp(() {
     mockGetPopularMovies = MockGetPopularMovies();
     bloc = PopularMovieBloc(mockGetPopularMovies);
+    fetchPopularMovie = FetchPopularMovie();
   });
   final tId = 1;
 
@@ -73,4 +75,7 @@ void main() {
       verify(mockGetPopularMovies.execute());
     },
   );
+  test('should get property empty from FetchPopularMovie', () {
+    expect(fetchPopularMovie.props, []);
+  });
 }

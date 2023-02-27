@@ -1,10 +1,8 @@
 import 'package:core/utils/constants.dart';
-import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/bloc/search/tv_search_bloc.dart';
 import 'package:tv/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchTVPage extends StatelessWidget {
   static const ROUTE_NAME = '/search-tv';
@@ -38,11 +36,11 @@ class SearchTVPage extends StatelessWidget {
             ),
             BlocBuilder<TVSearchBloc, TVSearchState>(
               builder: (context, state) {
-                if (state is SearchLoading) {
+                if (state is TVSearchLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is SearchHasData) {
+                } else if (state is TVSearchHasData) {
                   final result = state.result;
                   return Expanded(
                     child: ListView.builder(
@@ -54,7 +52,7 @@ class SearchTVPage extends StatelessWidget {
                       itemCount: result.length,
                     ),
                   );
-                } else if (state is SearchError) {
+                } else if (state is TVSearchError) {
                   return Expanded(
                     child: Center(
                       child: Text(state.message),

@@ -14,14 +14,16 @@ import 'movie_search_bloc_test.mocks.dart';
 void main() {
   late MovieSearchBloc searchBloc;
   late MockSearchMovies mockSearchMovies;
+  late OnQueryChanged onQueryChanged;
 
   setUp(() {
     mockSearchMovies = MockSearchMovies();
     searchBloc = MovieSearchBloc(mockSearchMovies);
+    onQueryChanged = OnQueryChanged("movie");
   });
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(searchBloc.state, SearchMovieEmpty());
   });
 
   final tMovieModel = Movie(
@@ -53,8 +55,8 @@ void main() {
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      SearchLoading(),
-      SearchHasData(tMovieList),
+      SearchMovieLoading(),
+      SearchMovieHasData(tMovieList),
     ],
     verify: (bloc) {
       verify(mockSearchMovies.execute(tQuery));
@@ -71,11 +73,15 @@ void main() {
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
     expect: () => [
-      SearchLoading(),
-      SearchError('Server Failure'),
+      SearchMovieLoading(),
+      SearchMovieError('Server Failure'),
     ],
     verify: (bloc) {
       verify(mockSearchMovies.execute(tQuery));
     },
   );
+  test('should get property query from OnQueryChanged', () {
+    String query = "movie";
+    expect(onQueryChanged.props, [query]);
+  });
 }

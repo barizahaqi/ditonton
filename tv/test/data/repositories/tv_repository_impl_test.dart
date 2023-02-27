@@ -120,6 +120,18 @@ void main() {
         verify(mockRemoteDataSource.getNowPlayingTV());
         expect(result, equals(Left(ServerFailure(''))));
       });
+      test(
+        'should return SSL failure when certificate verify failed',
+        () async {
+          // arrange
+          when(mockRemoteDataSource.getNowPlayingTV())
+              .thenThrow(TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.getNowPlayingTV();
+          // assert
+          expect(result, Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+        },
+      );
     });
 
     group('when device is offline', () {
@@ -188,6 +200,18 @@ void main() {
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
+    test(
+      'should return SSL failure when certificate verify failed',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.getPopularTV())
+            .thenThrow(TlsException('CERTIFICATE_VERIFY_FAILED'));
+        // act
+        final result = await repository.getPopularTV();
+        // assert
+        expect(result, Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      },
+    );
   });
 
   group('Top Rated TV', () {
@@ -226,6 +250,18 @@ void main() {
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
+    test(
+      'should return SSL failure when certificate verify failed',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.getTopRatedTV())
+            .thenThrow(TlsException('CERTIFICATE_VERIFY_FAILED'));
+        // act
+        final result = await repository.getTopRatedTV();
+        // assert
+        expect(result, Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      },
+    );
   });
 
   group('Get TV Detail', () {
@@ -291,6 +327,18 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+    test(
+      'should return SSL failure when certificate verify failed',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.getTVDetail(tId))
+            .thenThrow(TlsException('CERTIFICATE_VERIFY_FAILED'));
+        // act
+        final result = await repository.getTVDetail(tId);
+        // assert
+        expect(result, Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      },
+    );
   });
 
   group('Get TV Recommendations', () {
@@ -336,6 +384,18 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+    test(
+      'should return SSL failure when certificate verify failed',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.getTVRecommendations(tId))
+            .thenThrow(TlsException('CERTIFICATE_VERIFY_FAILED'));
+        // act
+        final result = await repository.getTVRecommendations(tId);
+        // assert
+        expect(result, Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      },
+    );
   });
 
   group('Seach TV', () {
@@ -376,6 +436,18 @@ void main() {
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
+    test(
+      'should return SSL failure when certificate verify failed',
+      () async {
+        // arrange
+        when(mockRemoteDataSource.searchTV(tQuery))
+            .thenThrow(TlsException('CERTIFICATE_VERIFY_FAILED'));
+        // act
+        final result = await repository.searchTV(tQuery);
+        // assert
+        expect(result, Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      },
+    );
   });
 
   group('save watchlist', () {

@@ -28,21 +28,3 @@ class WatchlistTVHasData extends WatchlistTVState {
   @override
   List<Object> get props => [watchlistResult];
 }
-
-class WatchlistTVMessage extends WatchlistTVState {
-  final String watchlistMessage;
-
-  WatchlistTVMessage(this.watchlistMessage);
-
-  @override
-  List<Object> get props => [watchlistMessage];
-}
-
-class WatchlistTVGetStatus extends WatchlistTVState {
-  final bool watchlistStatus;
-
-  WatchlistTVGetStatus(this.watchlistStatus);
-
-  @override
-  List<Object> get props => [watchlistStatus];
-}

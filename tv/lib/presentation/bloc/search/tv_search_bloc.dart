@@ -10,17 +10,17 @@ part 'tv_search_state.dart';
 class TVSearchBloc extends Bloc<TVSearchEvent, TVSearchState> {
   final SearchTV searchTV;
 
-  TVSearchBloc(this.searchTV) : super(SearchEmpty()) {
+  TVSearchBloc(this.searchTV) : super(TVSearchEmpty()) {
     on<OnQueryChanged>((event, emit) async {
       final query = event.query;
 
-      emit(SearchLoading());
+      emit(TVSearchLoading());
       final result = await searchTV.execute(query);
 
       result.fold((failure) {
-        emit(SearchError(failure.message));
+        emit(TVSearchError(failure.message));
       }, (data) {
-        emit(SearchHasData(data));
+        emit(TVSearchHasData(data));
       });
     }, transformer: debounce(const Duration(milliseconds: 500)));
   }

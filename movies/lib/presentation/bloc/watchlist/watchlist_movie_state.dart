@@ -28,21 +28,3 @@ class WatchlistMoviesHasData extends WatchlistMovieState {
   @override
   List<Object> get props => [watchlistResult];
 }
-
-class WatchlistMovieMessage extends WatchlistMovieState {
-  final String watchlistMessage;
-
-  WatchlistMovieMessage(this.watchlistMessage);
-
-  @override
-  List<Object> get props => [watchlistMessage];
-}
-
-class WatchlistMovieGetStatus extends WatchlistMovieState {
-  final bool watchlistStatus;
-
-  WatchlistMovieGetStatus(this.watchlistStatus);
-
-  @override
-  List<Object> get props => [watchlistStatus];
-}

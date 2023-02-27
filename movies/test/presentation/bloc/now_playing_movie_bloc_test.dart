@@ -15,9 +15,11 @@ import 'now_playing_movie_bloc_test.mocks.dart';
 void main() {
   late MockGetNowPlayingMovies mockGetNowPlayingMovies;
   late NowPlayingMovieBloc bloc;
+  late FetchNowPlayingMovie fetchNowPlayingMovie;
   setUp(() {
     mockGetNowPlayingMovies = MockGetNowPlayingMovies();
     bloc = NowPlayingMovieBloc(mockGetNowPlayingMovies);
+    fetchNowPlayingMovie = FetchNowPlayingMovie();
   });
   final tId = 1;
 
@@ -74,4 +76,7 @@ void main() {
       verify(mockGetNowPlayingMovies.execute());
     },
   );
+  test('should get property empty from FetchNowPlayingMovie', () {
+    expect(fetchNowPlayingMovie.props, []);
+  });
 }

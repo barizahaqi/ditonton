@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/domain/entities/genre.dart';
-import 'package:tv/domain/entities/tv.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/entities/tv_detail.dart';
 import 'package:tv/presentation/bloc/detail/tv_detail_bloc.dart';
@@ -28,33 +28,50 @@ class _TVDetailPageState extends State<TVDetailPage> {
     super.initState();
     Future.microtask(() {
       context.read<TVDetailBloc>().add(FetchTVDetail(widget.id));
-      context
-          .read<TVRecommendationBloc>()
-          .add(FetchTVRecommendation(widget.id));
-      context.read<TVWatchlistBloc>().add(LoadTVWatchlistStatus(widget.id));
+      context.read<TVDetailBloc>().add(LoadTVWatchlistStatus(widget.id));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final isAddedWatchlist = context.select<TVWatchlistBloc, bool>((bloc) {
-      if (bloc.state is WatchlistTVGetStatus) {
-        return (bloc.state as WatchlistTVGetStatus).watchlistStatus;
-      }
-      return false;
-    });
     return Scaffold(
-      body: BlocBuilder<TVDetailBloc, TVDetailState>(
-        builder: (context, state) {
-          if (state is DetailTVLoading) {
-            return Center(
+      body: BlocConsumer<TVDetailBloc, TVDetailState>(
+        listener: (context, state) {
+          final message = state.watchlistMessage;
+          if (message == TVDetailBloc.messageSuccessAdded ||
+              message == TVDetailBloc.messageSuccessRemoved) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(message),
+              ),
+            );
+          } else {
+            showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(
+                  content: Text(message),
+                );
+              },
+            );
+          }
+        },
+        listenWhen: (oldState, newState) {
+          return oldState.watchlistMessage != newState.watchlistMessage &&
+              newState.watchlistMessage != '';
+        },
+        builder: (_, state) {
+          final tvDetailState = state.tvDetailState;
+          if (tvDetailState == RequestState.Loading) {
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is TVDetailHasData) {
+          } else if (tvDetailState == RequestState.Loaded) {
             return SafeArea(
-              child: DetailContent(state.detailResult, isAddedWatchlist),
+              child: DetailContent(
+                  state.tvDetail!, state.isAddedToWatchlist, widget.id),
             );
-          } else if (state is DetailTVError) {
+          } else if (tvDetailState == RequestState.Error) {
             return Center(
               child: Text(state.message),
             );
@@ -70,8 +87,9 @@ class _TVDetailPageState extends State<TVDetailPage> {
 class DetailContent extends StatefulWidget {
   final TVDetail tv;
   bool isAddedWatchlist;
+  final int id;
 
-  DetailContent(this.tv, this.isAddedWatchlist);
+  DetailContent(this.tv, this.isAddedWatchlist, this.id);
 
   @override
   State<DetailContent> createState() => _DetailContentState();
@@ -122,45 +140,13 @@ class _DetailContentState extends State<DetailContent> {
                               onPressed: () async {
                                 if (!widget.isAddedWatchlist) {
                                   context
-                                      .read<TVWatchlistBloc>()
+                                      .read<TVDetailBloc>()
                                       .add(AddTVWatchlist(widget.tv));
                                 } else {
                                   context
-                                      .read<TVWatchlistBloc>()
+                                      .read<TVDetailBloc>()
                                       .add(RemoveTVWatchlist(widget.tv));
                                 }
-                                final stateWatchlist =
-                                    BlocProvider.of<TVWatchlistBloc>(context)
-                                        .state;
-                                String message = "";
-                                if (stateWatchlist is WatchlistTVGetStatus) {
-                                  message = stateWatchlist.watchlistStatus
-                                      ? TVWatchlistBloc.messageSuccessRemoved
-                                      : TVWatchlistBloc.messageSuccessAdded;
-                                } else {
-                                  message = !widget.isAddedWatchlist
-                                      ? TVWatchlistBloc.messageSuccessRemoved
-                                      : TVWatchlistBloc.messageSuccessAdded;
-                                }
-                                if (message ==
-                                        TVWatchlistBloc.messageSuccessAdded ||
-                                    message ==
-                                        TVWatchlistBloc.messageSuccessRemoved) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text('Failed'),
-                                        );
-                                      });
-                                }
-                                setState(() {
-                                  widget.isAddedWatchlist =
-                                      !widget.isAddedWatchlist;
-                                });
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,

@@ -1,5 +1,4 @@
 import 'package:core/utils/constants.dart';
-import 'package:core/utils/state_enum.dart';
 import 'package:movies/presentation/bloc/search/movie_search_bloc.dart';
 import 'package:movies/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +37,11 @@ class SearchMoviesPage extends StatelessWidget {
             ),
             BlocBuilder<MovieSearchBloc, MovieSearchState>(
               builder: (context, state) {
-                if (state is SearchLoading) {
+                if (state is SearchMovieLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is SearchHasData) {
+                } else if (state is SearchMovieHasData) {
                   final result = state.result;
                   return Expanded(
                     child: ListView.builder(
@@ -54,16 +53,14 @@ class SearchMoviesPage extends StatelessWidget {
                       itemCount: result.length,
                     ),
                   );
-                } else if (state is SearchError) {
+                } else if (state is SearchMovieError) {
                   return Expanded(
                     child: Center(
                       child: Text(state.message),
                     ),
                   );
                 } else {
-                  return Expanded(
-                    child: Container(),
-                  );
+                  return Expanded(child: Container());
                 }
               },
             ),
