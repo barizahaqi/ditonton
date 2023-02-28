@@ -1,0 +1,26 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "backdrop_path": "/jMxwjnzjnTZz3ku6nJWvjg0T2nd.jpg",
+            "first_air_date": "2016-03-30",
+            "genre_ids": [
+                18
+            ],
+            "id": 65227,
+            "name": "The Path",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Path",
+            "overview": "The Path explores the unknown and mysterious world of the cult-like Meyerist Movement in upstate New York. At the center of the movement lies Eddie, a conflicted husband; Sarah, his devoted wife; and Cal, an ambitious leader. We follow each as they contend with deep issues involving relationships, faith, and power.",
+            "popularity": 11.737,
+            "poster_path": "/se3MZ1OVfIrZqFJkpm3kVnpkKpO.jpg",
+            "vote_average": 6.6,
+            "vote_count": 115
+        }
+    ],
+    "total_pages": 1,
+    "total_results": 20
+}
